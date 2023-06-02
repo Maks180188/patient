@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddNewPatientRequest;
-use App\Models\Patient;
 use App\Services\Interfaces\PatientServiceInterface;
 
 class PatientController extends Controller
@@ -14,7 +13,7 @@ class PatientController extends Controller
     {
     }
 
-    public function addNewPatient(AddNewPatientRequest $request): Patient
+    public function addNewPatient(AddNewPatientRequest $request)
     {
         return $this->patientService->createPatient($request->validated());
     }

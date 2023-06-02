@@ -2,10 +2,8 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Models\Patient;
-
 interface PatientRepositoryInterface
 {
-    public function createPatient(array $data): Patient;
+    public function createPatient(array $data);
 
 }

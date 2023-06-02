@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\PatientRepositoryInterface;
 use DateTime;
-use App\Models\Patient;
 
 class PatientService implements Interfaces\PatientServiceInterface
 {
@@ -14,7 +13,7 @@ class PatientService implements Interfaces\PatientServiceInterface
     /**
      * @throws \Exception
      */
-    public function createPatient(array $data): Patient
+    public function createPatient(array $data)
     {
         $formattedBirthdayDateFromForm = self::dateFormatting($data['date']);
         $currentDate = date('d-m-Y');
