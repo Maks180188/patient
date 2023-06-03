@@ -18,3 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::post('/add-new-patient', [PatientController::class, 'addNewPatient']);
+Route::get('/get-patients', [PatientController::class, 'getPatients']);

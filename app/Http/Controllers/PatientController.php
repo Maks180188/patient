@@ -17,4 +17,9 @@ class PatientController extends Controller
     {
         return $this->patientService->createPatient($request->validated());
     }
+
+    public function getPatients(): array
+    {
+        return $this->patientService->getPatientList();
+    }
 }

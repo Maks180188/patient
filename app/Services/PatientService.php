@@ -40,7 +40,7 @@ class PatientService implements Interfaces\PatientServiceInterface
 
     public function getPatientList(): array
     {
-        // TODO: Implement getPatientList() method.
+        return $this->patientRepository->getAllPatients();
     }
 
     public function deletePatient(): array
@@ -100,5 +100,10 @@ class PatientService implements Interfaces\PatientServiceInterface
             'ageType' => $ageType,
             'ageValue' => $ageValue,
         ];
+    }
+
+    public static function addNewPatientDataToCache(array $data): void
+    {
+        cache(['new_patients' => $data], now()->addMinutes(5));
     }
 }

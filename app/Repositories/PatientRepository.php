@@ -12,4 +12,9 @@ class PatientRepository implements Interfaces\PatientRepositoryInterface
     {
         ProcessCreatePatient::dispatch($data);
     }
+
+    public function getAllPatients(): array
+    {
+        return Patient::all()->toArray();
+    }
 }

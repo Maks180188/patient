@@ -6,4 +6,5 @@ interface PatientRepositoryInterface
 {
     public function createPatient(array $data);
 
+    public function getAllPatients(): array;
 }
