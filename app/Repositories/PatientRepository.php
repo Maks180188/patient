@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Http\Formaters\PatientFormatter;
 use App\Jobs\ProcessCreatePatient;
 use App\Models\Patient;
 
 class PatientRepository implements Interfaces\PatientRepositoryInterface
 {
-
     public function createPatient(array $data): void
     {
         ProcessCreatePatient::dispatch($data);
@@ -15,6 +15,8 @@ class PatientRepository implements Interfaces\PatientRepositoryInterface
 
     public function getAllPatients(): array
     {
-        return Patient::all()->toArray();
+        $patients = Patient::all()->toArray();
+
+        return (new PatientFormatter())->multi($patients);
     }
 }

@@ -74,6 +74,7 @@ export default {
                 date: this.date,
             }).then((res) => {
                 this.clearFormData()
+                this.fetchPatients()
             }).catch((err) => {
                 if (err.response.status === 422) {
                     this.errors = err.response.data.errors
@@ -89,6 +90,7 @@ export default {
         async fetchPatients() {
             await axios.get('/get-patients').then((res) => {
                 this.table.items = res.data
+                console.log('res', res)
             }).catch((err) => {
                 console.log('error', err)
             })
