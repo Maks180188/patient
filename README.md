@@ -1,3 +1,4 @@
+<H3>Задача:</H3>
 Необходимо попробовать максимально задействовать возможности фреймворка по канонам паттерна MVC.
 
 Есть сущность "Пациент" с полями first_name, last_name, birthdate, age, age_type
@@ -13,40 +14,42 @@
 
 5. запросом из роута нужно выгрузить список сущностей и также задействовать кеш (если есть и не просрочился). Выгружается полями name (конкатенация first_name + last_name), дата рождения в формате (d.m.Y) и возвраст в формате "4 день" (склонять не надо)
 
+<H3>Выполнение:</H3>
+<h5>При выполнении ТЗ использовалось:</h5>
+- Laravel 9,
+- PHP 8.1,
+- VueJs 3,
+- Wawe UI - библиотека для фронта
+- MySQL
 
-При выполнении ТЗ использовалось:
-Laravel 9,
-PHP 8.1,
-VueJs 3,
-Wawe UI - библиотека для фронта
-MySQL
+<h5>Развернуть проект локально:</h5>
 
-Применён паттерн Repository-Service Pattern
+cp .env.example .env (создаём локально БД и прописываем свои данные, указываем QUEUE_CONNECTION=database) <br>
+php artisan key:generate<br>
+composer install --ignore-platform-reqs<br>
+php artisan serve<br>
+php artisan migrate<br>
+php artisan queue:work - для запуска очередей<br>
+npm install (node version 14.19.3)<br>
+npm run dev<br> 
 
-Развернуть проект локально:
+<h5>Описание:</h5>
 
-cp .env.example .env (создаём локально БД и прописываем свои данные, указываем QUEUE_CONNECTION=database)
-php artisan key:generate
-composer install --ignore-platform-reqs
-php artisan serve
-php artisan migrate
-php artisan queue:work - для запуска очередей
-npm install (node version 14.19.3)
-npm run dev
+Применён паттерн <b>Repository-Service Pattern</b>
 
 На главной странице отображается форма для добавления нового пациента и таблица пациентов
 код находится в resources/js/components/PatientComponent.vue
 
-Форма валидируется, выводятся ошибки
+Форма валидируется, выводятся ошибки,
 валидация выполнена в Http/Requests/AddNewPatientRequest.php
 
-запрос на создание пациента напрвляется в контроллер Http/Controllers/PatientController.php
-там два метода. Один на добавление пользователя, второе на получение списка существующих пользователей
+запрос на создание пациента напрвляется в контроллер Http/Controllers/PatientController.php <br>
+там два метода. Один на добавление пользователя, второй на получение списка существующих пользователей
 
 Логика находится в Services/PatientService.php
 в нём приводится тип даты к нужному формату, расчитывается тип и значение возраста, добавляются в кеш данные, вызывается Job на сохранение в БД 
 
-Создание сущности происходит с использованием очереди Jobs/ProcessCreatePatient.php
+Создание сущности происходит с использованием очереди Jobs/ProcessCreatePatient.php <br>
 *сделано для примера/демонстрации. В реальном проекте такая операция не требует использования очередей
 
 также данные о новом пациенте отправляются в кеш на 5 минут (без дальнейшего использования, для примера)
